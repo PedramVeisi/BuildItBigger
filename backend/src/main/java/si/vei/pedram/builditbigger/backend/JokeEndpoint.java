@@ -14,7 +14,7 @@ import javax.inject.Named;
 
 /** An endpoint class we are exposing */
 @Api(
-  name = "myApi",
+  name = "jokeApi",
   version = "v1",
   namespace = @ApiNamespace(
     ownerDomain = "backend.builditbigger.pedram.vei.si",
@@ -22,12 +22,12 @@ import javax.inject.Named;
     packagePath=""
   )
 )
-public class MyEndpoint {
+public class JokeEndpoint {
 
     /** A simple endpoint method that takes a name and says Hi back */
     @ApiMethod(name = "sayHi")
-    public MyBean sayHi(@Named("name") String name) {
-        MyBean response = new MyBean();
+    public JokeBean sayHi(@Named("name") String name) {
+        JokeBean response = new JokeBean();
         response.setData("Hi, " + name);
 
         return response;
