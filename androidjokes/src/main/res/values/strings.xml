@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">AndroidJokes</string>
+    <string name="INTENT_JOKE_STRING" translatable="false">joke</string>
+</resources>
