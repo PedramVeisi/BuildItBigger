@@ -1,9 +1,6 @@
 package si.vei.pedram.builditbigger;
 
 import android.test.AndroidTestCase;
-
-import junit.framework.TestCase;
-
 import java.util.concurrent.TimeUnit;
 
 /**
