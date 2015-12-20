@@ -1,19 +1,12 @@
 package si.vei.pedram.builditbigger;
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Pair;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.udacity.gradle.builditbigger.R;
-
-import si.vei.pedram.Joker;
-import si.vei.pedram.androidjokes.DisplayJoke;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -47,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void tellJoke(View view){
+    public void tellJoke(View view) {
 
         new EndpointsAsyncTask().execute(this);
 
