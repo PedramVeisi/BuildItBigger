@@ -1,4 +1,4 @@
-package com.udacity.gradle.builditbigger;
+package si.vei.pedram.builditbigger;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
