@@ -19,18 +19,24 @@ import si.vei.pedram.builditbigger.backend.jokeApi.JokeApi;
 class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     private static JokeApi mApiService = null;
     private Context mContext;
+    private boolean mShowDialog;
     ProgressDialog mDialog;
 
-    public EndpointsAsyncTask(Context context){
+    public EndpointsAsyncTask(Context context, boolean showDialog){
         this.mContext = context;
-        mDialog = new ProgressDialog(context);
+        this.mShowDialog = showDialog;
+        if (showDialog){
+            this.mDialog = new ProgressDialog(context);
+        }
     }
 
     @Override
     protected void onPreExecute() {
-        mDialog.setTitle(mContext.getString(R.string.please_wait));
-        mDialog.setMessage(mContext.getString(R.string.retrieving_joke));
-        mDialog.show();
+        if(mShowDialog){
+            mDialog.setTitle(mContext.getString(R.string.please_wait));
+            mDialog.setMessage(mContext.getString(R.string.retrieving_joke));
+            mDialog.show();
+        }
     }
 
     @Override
@@ -62,8 +68,9 @@ class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        mDialog.dismiss();
-
+        if(mShowDialog){
+            mDialog.dismiss();
+        }
         Intent intent = new Intent(mContext, DisplayJoke.class);
         intent.putExtra(mContext.getString(R.string.INTENT_JOKE_STRING), new Joker().getJoke());
 

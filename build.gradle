@@ -17,3 +17,29 @@ allprojects {
         jcenter()
     }
 }
+
+evaluationDependsOn(':backend')
+
+task startBackend{
+    dependsOn tasks.getByPath(":backend:appengineRun")
+    doLast {
+        println "Start Backend"
+    }
+}
+
+
+task runTests{
+    dependsOn tasks.getByPath(":app:connectedAndroidTest")
+    mustRunAfter "startBackend"
+    doLast {
+        println "Run Tests"
+    }
+}
+
+task stopBackend() {
+    dependsOn tasks.getByPath(":backend:appengineStop")
+    mustRunAfter "startBackend", "runTest"
+    doLast {
+        println "Stop Backend"
+    }
+}

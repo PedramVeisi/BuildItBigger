@@ -9,12 +9,12 @@ import java.util.concurrent.TimeUnit;
 public class EndpointsAsyncTaskTest extends AndroidTestCase {
     public void testJokeIsReturned() {
         try {
-            EndpointsAsyncTask jokeTask = new EndpointsAsyncTask();
-            jokeTask.execute(mContext);
+            EndpointsAsyncTask jokeTask = new EndpointsAsyncTask(mContext, false);
+            jokeTask.execute();
             String joke = jokeTask.get(30, TimeUnit.SECONDS);
             assertFalse(joke.isEmpty());
         } catch (Exception e) {
-            fail("Timed out!");
+            fail(e.toString());
         }
     }
 }

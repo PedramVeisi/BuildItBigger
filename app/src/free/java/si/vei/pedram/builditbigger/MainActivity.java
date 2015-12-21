@@ -69,7 +69,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void tellJoke() {
-        new EndpointsAsyncTask(this).execute();
+        new EndpointsAsyncTask(this, true).execute();
     }
 
     private void requestNewInterstitial() {
