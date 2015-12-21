@@ -1,5 +1,6 @@
 package si.vei.pedram.builditbigger;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -15,12 +16,25 @@ import si.vei.pedram.Joker;
 import si.vei.pedram.androidjokes.DisplayJoke;
 import si.vei.pedram.builditbigger.backend.jokeApi.JokeApi;
 
-class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
+class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     private static JokeApi mApiService = null;
     private Context mContext;
+    ProgressDialog mDialog;
+
+    public EndpointsAsyncTask(Context context){
+        this.mContext = context;
+        mDialog = new ProgressDialog(context);
+    }
 
     @Override
-    protected String doInBackground(Context... params) {
+    protected void onPreExecute() {
+        mDialog.setTitle(mContext.getString(R.string.please_wait));
+        mDialog.setMessage(mContext.getString(R.string.retrieving_joke));
+        mDialog.show();
+    }
+
+    @Override
+    protected String doInBackground(Void... params) {
         if(mApiService == null) {  // Only do this once
             JokeApi.Builder builder = new JokeApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -39,8 +53,6 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
             mApiService = builder.build();
         }
 
-        mContext = params[0];
-
         try {
             return mApiService.getJoke().execute().getData();
         } catch (IOException e) {
@@ -50,6 +62,8 @@ class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
+        mDialog.dismiss();
+
         Intent intent = new Intent(mContext, DisplayJoke.class);
         intent.putExtra(mContext.getString(R.string.INTENT_JOKE_STRING), new Joker().getJoke());
 

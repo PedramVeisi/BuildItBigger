@@ -1,4 +1,4 @@
-package si.vei.pedram.builditbigger.paid;
+package si.vei.pedram.builditbigger;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
