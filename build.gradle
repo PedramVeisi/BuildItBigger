@@ -27,7 +27,6 @@ task startBackend{
     }
 }
 
-
 task runTests{
     dependsOn tasks.getByPath(":app:connectedAndroidTest")
     mustRunAfter "startBackend"
@@ -38,7 +37,7 @@ task runTests{
 
 task stopBackend() {
     dependsOn tasks.getByPath(":backend:appengineStop")
-    mustRunAfter "startBackend", "runTest"
+    mustRunAfter "startBackend", "runTests"
     doLast {
         println "Stop Backend"
     }
